@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+
+table{
+  width: 100%;
+  border: 1px solid black;
+  border-spacing: 0px;
+}
+td{
+  text-align:  center;
+  border: 1px solid grey;
+  padding: 5px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+}
+thead{
+    background: grey;
+}
+th{
+  background: #ffbdbd;
+  padding: 10px 5px;
+  border: 1px solid black;
+  font-family: 'Ubuntu Condensed', sans-serif;
+  font-size: 16px;
+}
