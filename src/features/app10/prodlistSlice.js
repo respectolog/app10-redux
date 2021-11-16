@@ -30,12 +30,16 @@ export const prodlistSlice = createSlice({
       // doesn't actually mutate the state because it uses the Immer library,
       // which detects changes to a "draft state" and produces a brand new
       // immutable state based off those changes
-      //state.list.splice(tag_story.indexOf(id_tag), 1)
+
       state.list.push(action.payload);
-      console.log(action.payload);
     },
     deleteString: (state, action) => {
-      state.list.splice(action.payload, 1);
+      for (let i = 0; i < state.list.length; i++) {
+        if (state.list[i].num === action.payload) {
+          var x = i;
+        }
+      }
+      state.list.splice(x, 1);
     },
     // Use the PayloadAction type to declare the contents of `action.payload`
   },

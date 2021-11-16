@@ -6,29 +6,28 @@ export function Prodlist() {
   const table = useSelector(selectMassive);
   const dispatch = useDispatch();
 
-  var prodlist = [];
-  for (let i = 0; i < table.length; i++) {
-    prodlist.push(
-      <tr key={table[i].num}>
-        <td>{table[i].dataReg}</td>
-        <td>{table[i].kioskName}</td>
-        <td>{table[i].chequeType === 0 ? "Продажа" : "Возврат"}</td>
+  return table.map(function (item) {
+    return (
+      <tr key={item.num}>
+        <td>{item.dataReg}</td>
+        <td>{item.kioskName}</td>
+        <td>{item.chequeType === 0 ? "Продажа" : "Возврат"}</td>
         <td>
-          <Payornot pays={table[i].pays} sum={table[i].sum} />
+          <Payornot pays={item.pays} sum={item.sum} />
         </td>
         <td>
-          <Tempsum pays={table[i].pays} />
+          <Tempsum pays={item.pays} />
         </td>
-        <td>{table[i].sum / 100}</td>
+        <td>{item.sum / 100}</td>
         <td>
-          <Quantity position={table[i].positions} />
+          <Quantity position={item.positions} />
         </td>
         <td>
-          <Tovari names={table[i].positions} />
+          <Tovari names={item.positions} />
         </td>
         <td>
           <button
-            onClick={() => dispatch(deleteString(i))}
+            onClick={() => dispatch(deleteString(item.num))}
             className="delButton"
           >
             Удалить
@@ -36,7 +35,5 @@ export function Prodlist() {
         </td>
       </tr>
     );
-  }
-
-  return prodlist;
+  });
 }

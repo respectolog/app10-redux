@@ -2,10 +2,8 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import Modal from "react-modal";
 import { addString } from "./prodlistSlice";
-import { v4 as uniqId } from 'uuid';
-import validator from 'validator';
-
-
+import { v4 as uniqId } from "uuid";
+import validator from "validator";
 
 export function Formadd() {
   const dispatch = useDispatch();
@@ -19,31 +17,32 @@ export function Formadd() {
   const [payStatus] = useState(0);
   const [quantity, setQuantity] = useState(0);
   const [namesList, setNames] = useState("");
-  
 
   const [inputsValid, setValid] = useState({
     date: false,
-    kiosk: validator.isLength(kioskName, {min:5, max:40}),
+    kiosk: validator.isLength(kioskName, { min: 5, max: 40 }),
     pay: false,
     sum: false,
     quan: false,
     names: false,
   });
 
+  const formValid = (values) => {
+    if (
+      values.date === true &&
+      values.kiosk === true &&
+      values.pay === true &&
+      values.sum === true &&
+      values.quan === true &&
+      values.names === true
+    ) {
+      return false;
+    } else {
+      return true;
+    }
+  };
 
-
-const formValid = values =>{
-  if(values.date === true && values.kiosk === true && values.pay === true && values.sum === true && values.quan === true && values.names === true  ){
-    return false
-  }else{
-    return true
-  }
-}
-
-
-
-  Modal.setAppElement('#root');
-
+  Modal.setAppElement("#root");
 
   return (
     <div>
@@ -60,9 +59,18 @@ const formValid = values =>{
               type="datetime-local"
               value={bayDate}
               onChange={(event) => setDate(event.target.value)}
-              onInput={(event) => setValid({...inputsValid, date: validator.isISO8601(event.target.value)} )}
+              onInput={(event) =>
+                setValid({
+                  ...inputsValid,
+                  date: validator.isISO8601(event.target.value),
+                })
+              }
             />
-            <span className="warning">{ inputsValid.date === true ? '' : 'Неверный формат даты'}</span>
+            <span className="warning">
+              {inputsValid.date === true || bayDate === ""
+                ? ""
+                : "Неверный формат даты"}
+            </span>
           </label>
           <br />
           <label>
@@ -72,9 +80,21 @@ const formValid = values =>{
               type="text"
               value={kioskName}
               onChange={(event) => setKiosk(event.target.value)}
-              onInput={(event) => setValid({...inputsValid, kiosk: validator.isLength(event.target.value, {min:5, max:40})} )}
+              onInput={(event) =>
+                setValid({
+                  ...inputsValid,
+                  kiosk: validator.isLength(event.target.value, {
+                    min: 5,
+                    max: 40,
+                  }),
+                })
+              }
             />
-            <span className="warning">{ inputsValid.kiosk === true ? '' : 'Название киоска должно быть от 5 до 40 символов'}</span>
+            <span className="warning">
+              {inputsValid.kiosk === true
+                ? ""
+                : "Название киоска должно быть от 5 до 40 символов"}
+            </span>
           </label>
           <br />
           <label>
@@ -83,7 +103,6 @@ const formValid = values =>{
               name="typePay"
               value={typePay}
               onChange={(event) => setType(event.target.value)}
-
             >
               <option value="0">Продажа</option>
               <option value="1">Возврат</option>
@@ -97,9 +116,21 @@ const formValid = values =>{
               type="number"
               value={payDone}
               onChange={(event) => setPay(event.target.value)}
-              onInput={(event) => setValid({...inputsValid, pay: validator.isInt(event.target.value+'',{min:1, max: 5000})} )}
+              onInput={(event) =>
+                setValid({
+                  ...inputsValid,
+                  pay: validator.isInt(event.target.value + "", {
+                    min: 1,
+                    max: 5000,
+                  }),
+                })
+              }
             />
-            <span className="warning">{ inputsValid.pay === true ? '' : 'Значение должно быть действительным числом от 1 до 5000'}</span>
+            <span className="warning">
+              {inputsValid.pay === true || payDone === 0
+                ? ""
+                : "Значение должно быть действительным числом от 1 до 5000"}
+            </span>
           </label>
           <br />
           <label>
@@ -109,9 +140,21 @@ const formValid = values =>{
               type="number"
               value={paySum}
               onChange={(event) => setSum(event.target.value)}
-              onInput={(event) => setValid({...inputsValid, sum: validator.isInt(event.target.value+'',{min:1, max: 5000})} )}
+              onInput={(event) =>
+                setValid({
+                  ...inputsValid,
+                  sum: validator.isInt(event.target.value + "", {
+                    min: 1,
+                    max: 5000,
+                  }),
+                })
+              }
             />
-            <span className="warning">{ inputsValid.sum === true ? '' : 'Значение должно быть действительным числом от 1 до 5000'}</span>
+            <span className="warning">
+              {inputsValid.sum === true || paySum === 0
+                ? ""
+                : "Значение должно быть действительным числом от 1 до 5000"}
+            </span>
           </label>
           <br />
           <label>
@@ -121,9 +164,21 @@ const formValid = values =>{
               type="number"
               value={quantity}
               onChange={(event) => setQuantity(event.target.value)}
-              onInput={(event) => setValid({...inputsValid, quan: validator.isInt(event.target.value+'',{min:1, max: 50})} )}
+              onInput={(event) =>
+                setValid({
+                  ...inputsValid,
+                  quan: validator.isInt(event.target.value + "", {
+                    min: 1,
+                    max: 50,
+                  }),
+                })
+              }
             />
-            <span className="warning">{ inputsValid.quan === true ? '' : 'Значение должно быть действительным числом от 1 до 50'}</span>
+            <span className="warning">
+              {inputsValid.quan === true || quantity === 0
+                ? ""
+                : "Значение должно быть действительным числом от 1 до 50"}
+            </span>
           </label>
           <br />
           <label>
@@ -133,14 +188,22 @@ const formValid = values =>{
               type="text"
               value={namesList}
               onChange={(event) => setNames(event.target.value)}
-              onInput={(event) => setValid({...inputsValid, names: validator.isAlpha(event.target.value, ['ru-RU']) })}
+              onInput={(event) =>
+                setValid({
+                  ...inputsValid,
+                  names: validator.isAlpha(event.target.value, ["ru-RU"]),
+                })
+              }
             />
-            <span className="warning">{ inputsValid.names === true ? '' : 'Название товара должно быть на русском языке'}</span>
+            <span className="warning">
+              {inputsValid.names === true || namesList === ""
+                ? ""
+                : "Название товара должно быть на русском языке"}
+            </span>
           </label>
-
         </form>
         <button
-          onClick={() =>
+          onClick={() => {
             dispatch(
               addString({
                 dataReg: bayDate,
@@ -151,14 +214,15 @@ const formValid = values =>{
                 sum: paySum * 100,
                 positions: [{ name: namesList, quantity: parseInt(quantity) }],
               })
-            )
-          }
+            );
+            setModal(false);
+          }}
           className="AddButton"
           disabled={formValid(inputsValid)}
         >
           Добавить
         </button>
-        <button onClick={() => setModal(false)} className="closeButton"  >
+        <button onClick={() => setModal(false)} className="closeButton">
           Закрыть
         </button>
       </Modal>
