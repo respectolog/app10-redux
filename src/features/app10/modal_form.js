@@ -5,6 +5,7 @@ import { addString } from "./prodlistSlice";
 import { v4 as uniqId } from "uuid";
 import validator from "validator";
 
+Modal.setAppElement("#root");
 export function Formadd() {
   const dispatch = useDispatch();
 
@@ -42,7 +43,7 @@ export function Formadd() {
     }
   };
 
-  Modal.setAppElement("#root");
+
 
   return (
     <div>
