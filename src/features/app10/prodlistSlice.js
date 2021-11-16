@@ -34,21 +34,12 @@ export const prodlistSlice = createSlice({
       state.list.push(action.payload);
     },
     deleteString: (state, action) => {
-//      for (let i = 0; i < state.list.length; i++) {
-//        if (state.list[i].num === action.payload) {
-//          var x = i;
-//        }
-//      }
-//      state.list.splice(x, 1);
-
-      state.list.map(
-        function (item) {
-          if(item.num !== action.payload){
-            return item;
-          }
+      for (let i = 0; i < state.list.length; i++) {
+        if (state.list[i].num === action.payload) {
+          var x = i;
         }
-      );
-
+      }
+      state.list.splice(x, 1);
 
 
     },
